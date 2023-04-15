@@ -7,48 +7,57 @@
 // 8 4 2 4
 // 17 -> такого числа в массиве нет
 
+Console.Clear();
 
-Console.WriteLine("введите номер строки");
-int n = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("введите номер столбца");
-int m = Convert.ToInt32(Console.ReadLine());
-int [,] numbers = new int [10,10];
-FillArrayRandomNumbers(numbers);
+int n = ReadNumberFromConsole("Введите позицию искомого элемента в строке: ");
+int m = ReadNumberFromConsole("Введите позицию искомого элемента в столбце: ");
+int[,] numbers = new int[10, 10];  // объявляю новый массив с решёткой 10*10
+Console.WriteLine("В нашем массиве:");
+FillArrayRandomNumbers(numbers);  // наполняю массив псевдослучайными числами
+PrintArray(numbers);
 
-if (n > numbers.GetLength(0) || m > numbers.GetLength(1))
+if (n > numbers.GetLength(0) || m > numbers.GetLength(1))  // цикл для проверки на нахождения числа внутри массива
 {
-    Console.WriteLine("такого элемента нет");
+  Console.WriteLine();
+  Console.WriteLine("НЕТ элемента с запрошенными Вами данными");
 }
 else
 {
-    Console.WriteLine($"значение элемента {n} строки и {m} столбца равно {numbers[n-1,m-1]}");
+  Console.WriteLine();
+  Console.WriteLine($"Элемент в {n} строке и в {m} столбце равен {numbers[n - 1, m - 1]}");
 }
 
-PrintArray(numbers);
-
-void FillArrayRandomNumbers(int[,] array)
+int ReadNumberFromConsole(string message = "")  // метод для чтения из консоли введённого значения
 {
-    for (int i = 0; i < array.GetLength(0); i++)
-        {        
-            for (int j = 0; j < array.GetLength(1); j++)
-            {
-                array [i,j] = new Random().Next(-100, 100)/10;
-            }   
-        }
+  if (message != "")
+    Console.WriteLine(message);
+  string input = Console.ReadLine();
+  return int.Parse(input);
 }
 
-void PrintArray(int[,] array)
+void FillArrayRandomNumbers(int[,] array)  // метод для наполнения двумерного массива случайными числами
 {
-    for (int i = 0; i < array.GetLength(0); i++)
+  for (int i = 0; i < array.GetLength(0); i++)
+  {
+    for (int j = 0; j < array.GetLength(1); j++)
     {
-        Console.Write("[ ");
-        for (int j = 0; j < array.GetLength(1); j++)
-        {
-            Console.Write(array[i,j] + " ");
-        }   
-        Console.Write("]");
-        Console.WriteLine(""); 
+      array[i, j] = new Random().Next(-99, 100);
     }
+  }
+}
+
+void PrintArray(int[,] array)  // метод для вывода массива на печать
+{
+  for (int i = 0; i < array.GetLength(0); i++)
+  {
+    Console.Write("[ ");
+    for (int j = 0; j < array.GetLength(1); j++)
+    {
+      Console.Write($"{array[i, j]}  ");
+    }
+    Console.Write("]");
+    Console.WriteLine();
+  }
 }
 
 
