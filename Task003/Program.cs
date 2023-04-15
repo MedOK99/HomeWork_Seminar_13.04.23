@@ -7,49 +7,57 @@
 // Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
 
 
-Console.WriteLine("введите количество строк");
-int n = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("введите количество столбцов");
-int m = Convert.ToInt32(Console.ReadLine());
-
-int[,] numbers = new int[n, m];
-FillArrayRandomNumbers(numbers);
-
-for (int j = 0; j < numbers.GetLength(1); j++)
-{
-    double avarage = 0;
-    for (int i = 0; i < numbers.GetLength(0); i++)
-    {
-        avarage = (avarage + numbers[i, j]);
-    }
-    avarage = avarage / n;
-    Console.Write(avarage + "; ");
-}
-Console.WriteLine();
+Console.Clear();
+int n = ReadNumberFromConsole("Введите требуемое количество строк: ");
+int m = ReadNumberFromConsole("Введите требуемое количество столбцов: ");
+int[,] numbers = new int[n, m];   // объявляю новый массив с указанной пользователем сеткой
+FillArrayRandomNumbers(numbers);  // заполняю массив псевдослучайными числами
+Console.WriteLine("Мы получили массив:");
 PrintArray(numbers);
+Console.WriteLine("Среднее аррифметическое значение каждого столбца равно: ");
 
-void FillArrayRandomNumbers(int[,] array)
+for (int j = 0; j < numbers.GetLength(1); j++)  // цикл для подсчёта и вывода среднего арифметического значения
 {
-    for (int i = 0; i < array.GetLength(0); i++)
-    {
-        for (int j = 0; j < array.GetLength(1); j++)
-        {
-            array[i, j] = new Random().Next(0, 10);
-        }
-    }
+  double middle = 0;
+  for (int i = 0; i < numbers.GetLength(0); i++)
+  {
+    middle = (middle + numbers[i, j]);
+  }
+  middle = middle / n;
+  Console.Write($"{Math.Round(middle, 1)}; ");  // установил вывод результата на округление до одной цифры после запятой
+}
+// Подскажите пожалуйста, как избавиться от ";" в конце вывода ср.ар значения?
+
+int ReadNumberFromConsole(string message = "")  // метод для чтения из консоли введённого значения
+{
+  if (message != "")
+    Console.WriteLine(message);
+  string input = Console.ReadLine();
+  return int.Parse(input);
 }
 
-void PrintArray(int[,] array)
+void FillArrayRandomNumbers(int[,] array)   // метод для наполнения двумерного массива случайными числами
+{
+  for (int i = 0; i < array.GetLength(0); i++)
+  {
+    for (int j = 0; j < array.GetLength(1); j++)
+    {
+      array[i, j] = new Random().Next(10, 100);  // сделал только для двухзначных положительных значений (красивее))
+    }
+  }
+}
+
+void PrintArray(int[,] array)   // метод для вывода массива на печать
 {
 
-    for (int i = 0; i < array.GetLength(0); i++)
+  for (int i = 0; i < array.GetLength(0); i++)
+  {
+    Console.Write("[ ");
+    for (int j = 0; j < array.GetLength(1); j++)
     {
-        Console.Write("[ ");
-        for (int j = 0; j < array.GetLength(1); j++)
-        {
-            Console.Write(array[i, j] + " ");
-        }
-        Console.Write("]");
-        Console.WriteLine("");
+      Console.Write($"{array[i, j]} ");
     }
+    Console.Write("]");
+    Console.WriteLine();
+  }
 }
