@@ -17,7 +17,7 @@ FillArrayRandomNumbers(numbers);    // команда на заполнение 
 Console.WriteLine("Мы получили массив:");   // для "красоты")
 PrintArray(numbers);  // выводим массив на печать
 
-void FillArrayRandomNumbers(double[,] array)  // метод для наполнения двумерного массива случайными числами
+void FillArrayRandomNumbers(double[,] array)  // метод для наполнения двумерного массива псевдослучайными числами
 {
   for (int i = 0; i < array.GetLength(0); i++)
   {
