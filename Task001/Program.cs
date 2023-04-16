@@ -28,14 +28,14 @@ void FillArrayRandomNumbers(double[,] array)  // метод для наполн�
   }
 }
 
-void PrintArray(double[,] array)   // метод для вывода массива на печать
+void PrintArray(double[,] array)   // метод для вывода массива на печать c tab
 {
   for (int i = 0; i < array.GetLength(0); i++)
   {
-    Console.Write("[  ");
+    Console.Write("[    ");
     for (int j = 0; j < array.GetLength(1); j++)
     {
-      Console.Write($"{array[i, j]}  ");
+      Console.Write($"{array[i, j]}\t");
     }
     Console.Write("]");
     Console.WriteLine();

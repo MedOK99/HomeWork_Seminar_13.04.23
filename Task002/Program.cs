@@ -16,14 +16,13 @@ Console.WriteLine("В нашем массиве:");
 FillArrayRandomNumbers(numbers);  // наполняю массив псевдослучайными числами
 PrintArray(numbers);
 
+Console.WriteLine();
 if (n > numbers.GetLength(0) || m > numbers.GetLength(1))  // цикл для проверки на нахождения числа внутри массива
 {
-  Console.WriteLine();
   Console.WriteLine("НЕТ элемента с запрошенными Вами данными");
 }
 else
 {
-  Console.WriteLine();
   Console.WriteLine($"Элемент в {n} строке и в {m} столбце равен {numbers[n - 1, m - 1]}");
 }
 
@@ -46,14 +45,14 @@ void FillArrayRandomNumbers(int[,] array)  // метод для наполнен
   }
 }
 
-void PrintArray(int[,] array)  // метод для вывода массива на печать
+void PrintArray(int[,] array)  // метод для вывода массива на печать c табуляцией
 {
   for (int i = 0; i < array.GetLength(0); i++)
   {
     Console.Write("[ ");
     for (int j = 0; j < array.GetLength(1); j++)
     {
-      Console.Write($"{array[i, j]}  ");
+      Console.Write($"{array[i, j]}\t");
     }
     Console.Write("]");
     Console.WriteLine();
